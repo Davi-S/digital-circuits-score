@@ -1,4 +1,48 @@
-# Report
+# Digital Circuits Score System
+
+A digital system for managing and displaying a score using basic digital logic components. The project features an encoder, registers, an ALU for score operations, and a display driver for 7-segment displays. It's designed as an educational project for learning digital circuit design and score-tracking logic.
+
+## Features
+
+- **Score Addition:** When a sum button (0–4) is pressed, its value is encoded and added to the current score. The last button value is retained in a dedicated register.
+- **Undo Operation:** Pressing the *undo* button subtracts the last sum button value from the score. This can be repeated multiple times.
+- **Register Logic:** Registers use the button presses as clock signals. Score is only updated when buttons are released, preventing incorrect or multiple unintended additions.
+- **Score Display:** The score is shown using two 7-segment displays, driven by a decoder that converts the binary score to display signals.
+- **Game End Indicator:** An LED lights up when the score reaches 50 or more, using a comparator for detection.
+- **Score Wrapping:** If the score goes below zero, it wraps around to 255, allowing for cyclic subtraction.
+
+## Circuit Description
+
+1. **Button Encoder:** Encodes 5 (of 10 possible) button inputs (values 0–4) to binary.
+2. **Register System:** 
+   - One register stores the last sum button value.
+   - Another register stores the score.
+   - A flip-flop selects between addition and subtraction based on which button is pressed.
+3. **Score Updating:** 
+   - Addition happens when a sum button is pressed.
+   - Subtraction (undo) happens when the *undo* button is pressed.
+   - Registers are locked during button presses to avoid incorrect updates.
+4. **Display & Indicators:** 
+   - The score is shown on two 7-segment displays.
+   - An LED signals when the score reaches or exceeds 50.
+
+## How It Works
+
+- Press a sum button (0–4): The value is encoded, added to the score, and the result is displayed.
+- Press the *undo* button: The last sum value is subtracted from the score, which is updated and displayed.
+- If subtraction goes below zero, the score wraps to 255.
+- When the score reaches 50 or more, an LED turns on.
+
+## Usage
+
+This project is primarily for simulation or educational purposes. You can reproduce the circuit using digital logic simulation software or implement it using discrete logic components.
+
+## License
+
+[MIT License](LICENSE)
+
+
+## Report
 
 When a sum input is pressed, an encoder converts the button value into its binary representation. This binary value is then stored in a register that retains the value of the last sum button clicked. Simultaneously, this same value is added to the current content of another register, which stores the total score value. The result of this addition replaces the previous value in the score register.
 
